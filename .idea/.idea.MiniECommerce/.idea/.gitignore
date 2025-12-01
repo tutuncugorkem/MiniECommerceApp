@@ -1,0 +1,24 @@
+# .NET build folders
+bin/
+obj/
+
+# temp files
+*.log
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / IntelliJ
+.idea/
+*.iml
+
+# Visual Studio (Windows)
+.vs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Cache
+*.cache
