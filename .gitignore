@@ -1,0 +1,192 @@
+############################################################
+#  .NET / ASP.NET Core / Minimal API (Backend)
+############################################################
+
+# Build outputs
+bin/
+obj/
+
+# Publish outputs
+publish/
+out/
+
+# User-specific config
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Environment configuration files
+*.env
+*.env.*
+!.env.example
+
+# EF Core migration snapshots (optional: uncomment to ignore)
+# *Snapshot.cs
+
+############################################################
+#  IDE / Editors
+############################################################
+
+# Rider / JetBrains
+.idea/
+*.iml
+
+# Visual Studio
+.vs/
+
+# VS Code
+.vscode/
+*.code-workspace
+history/
+
+############################################################
+#  OS-Specific Files (macOS + Windows)
+############################################################
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+.Spotlight-V100
+.Trashes
+
+.AppleDB
+.AppleDesktop
+.apdisk
+
+### Windows ###
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+############################################################
+#  Logs & Temp Files
+############################################################
+
+*.log
+logs/
+Log/
+*.tmp
+*.temp
+tmp/
+temp/
+
+############################################################
+#  Git
+############################################################
+
+*.orig
+*.rej
+
+############################################################
+#  Database (future support: SQLite, PostgreSQL, Mongo)
+############################################################
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# PostgreSQL dumps
+*.sql
+*.dump
+
+# MongoDB dumps
+dump/
+
+############################################################
+#  Docker
+############################################################
+
+# Docker build cache
+.dockerignore
+docker-compose.override.yml
+docker-compose.local.yml
+docker-compose.debug.yml
+
+# Docker volumes (if mounted locally)
+docker-data/
+volumes/
+data/
+
+############################################################
+#  Frontend (Future React App)
+############################################################
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+.next/
+.out/
+
+# React configs
+*.cache/
+.cache/
+.eslintcache
+.stylelintcache
+
+# Env files
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+############################################################
+#  Test Projects (xUnit / NUnit / Jest / Playwright)
+############################################################
+
+# .NET test output
+TestResults/
+*.trx
+.coverage
+coverage/
+
+# Node test output (Jest)
+coverage/
+.nyc_output/
+
+# Playwright
+playwright-report/
+blob-report/
+test-results/
+
+############################################################
+#  Misc
+############################################################
+
+# Certs
+*.pfx
+*.p12
+*.key
+
+# Archives
+*.zip
+*.tar
+*.gz
+*.tgz
+
+# Local files
+local.settings.json
+
+# Ignore global files
+global.json
