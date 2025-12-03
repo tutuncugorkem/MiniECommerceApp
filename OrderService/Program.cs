@@ -21,16 +21,43 @@ if (app.Environment.IsDevelopment())
 // Create Order (Checkout)
 app.MapPost("/api/orders/checkout", async (CheckoutRequest request, IHttpClientFactory httpClientFactory) =>
 {
-    if (request.Items is null || request.Items.Count == 0)
-        return Results.BadRequest("Items boş olamaz");
+
+    var client = httpClientFactory.CreateClient();
+
+    // get products from basket service
+    var basketResponse = await client.GetAsync($"http://localhost:5217/api/basket/{request.UserId}");
+
+    if (!basketResponse.IsSuccessStatusCode)
+        return Results.BadRequest("Sepet bulunamadı.");
+
+    var basket = await basketResponse.Content.ReadFromJsonAsync<BasketDto>();
+
+    if (basket is null || basket.Items.Count == 0)
+        return Results.BadRequest("Sepet boş.");
+
+    // get price from catalog service
+
+    var orderItems = new List<OrderItem>();
+
+    foreach (var item in basket.Items)
+    {
+        var catalogResponse = await client.GetAsync($"http://localhost:5278/api/catalog/products/{item.ProductId}");
+        if (!catalogResponse.IsSuccessStatusCode)
+            return Results.BadRequest($"Ürün bulunamadı: {item.ProductId}");
+
+        var product = await catalogResponse.Content.ReadFromJsonAsync<ProductDto>();
+        if (product is null)
+            return Results.BadRequest($"Ürün bilgisi alınamadı: {item.ProductId}");
+
+        orderItems.Add(new OrderItem(
+            ProductId: item.ProductId,
+            Quantity: item.Quantity,
+            Price: product.Price));
+    }
+
+    var total = orderItems.Sum(i => i.Quantity * i.Price);
 
     var orderId = Guid.NewGuid().ToString("N");
-
-    var orderItems = request.Items
-        .Select(i => new OrderItem(i.ProductId, i.Quantity, i.Price))
-        .ToList();
-
-    var total = request.Items.Sum(i => i.Quantity * i.Price);
 
     var order = new Order(
         OrderId: orderId,
@@ -44,13 +71,15 @@ app.MapPost("/api/orders/checkout", async (CheckoutRequest request, IHttpClientF
     orders[orderId] = order;
 
     // Payment request send to payment service
-    var client = httpClientFactory.CreateClient();
-    var paymentRequest = new PaymentRequest(orderId, total);
-    var response = await client.PostAsJsonAsync("https://localhost:7263/api/payment", paymentRequest);
-    var paymentResult = await response.Content.ReadFromJsonAsync<PaymentResult>();
+
+    var paymentResponse = await client.PostAsJsonAsync("http://localhost:5220/api/payment", new PaymentRequest(
+        OrderId: orderId,
+        Amount: total
+    ));
+    var payment = await paymentResponse.Content.ReadFromJsonAsync<PaymentResult>();
 
     // If the payment is success
-    if (paymentResult?.Status == "Paid")
+    if (payment?.Status == "Paid")
     {
         var updatedOrder = order with { Status = "Paid" };
         orders[orderId] = updatedOrder;
@@ -103,3 +132,10 @@ public record UpdateOrderStatusRequest(string Status);
 // --- Payment DTOs ---
 public record PaymentRequest(string OrderId, decimal Amount);
 public record PaymentResult(string OrderId, string Status, string Message);
+
+// --- Basket DTOs ---
+public record BasketDto(string UserId, List<BasketItemDto> Items);
+public record BasketItemDto(int ProductId, int Quantity);
+
+public record ProductDto(int Id, string Name, decimal Price, int Stock);
+
