@@ -15,7 +15,6 @@ using System.Threading;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-// Bind settings
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("DatabaseSettings"));
 
@@ -47,7 +46,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 
-    // JWT Bearer şeması
+    // JWT Bearer scheme
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "Authorization",
