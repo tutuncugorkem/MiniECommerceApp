@@ -218,9 +218,3 @@ app.MapPut("/api/orders/{orderId}/status", (string orderId, UpdateOrderStatusReq
 }).RequireAuthorization();
 
 app.Run();
-
-
-// --- Request DTOs ---
-// DTOs moved to OrderService/Models/DtoDefinitions.cs
-
-// Keycloak options moved to Models/DtoDefinitions.cs
