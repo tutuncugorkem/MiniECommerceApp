@@ -1,10 +1,11 @@
+using MiniECommerce.Bus;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddMassTransitExt(builder.Configuration);
 // In-memory sepet listesi -> var baskets = new Dictionary<string, Basket>();
 // redis :
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>

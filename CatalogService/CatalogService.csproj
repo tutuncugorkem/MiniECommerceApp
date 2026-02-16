@@ -26,4 +26,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MiniECommerce.Bus\MiniECommerce.Bus.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniECommerce.Bus", "MiniECommerce.Bus\MiniECommerce.Bus.csproj", "{C7052EA2-9A9C-4840-8FA9-DA15BC3C8702}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,5 +48,9 @@ Global
 		{1BA71DDD-7740-4F88-8E33-A1D499A60F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA71DDD-7740-4F88-8E33-A1D499A60F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA71DDD-7740-4F88-8E33-A1D499A60F4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7052EA2-9A9C-4840-8FA9-DA15BC3C8702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7052EA2-9A9C-4840-8FA9-DA15BC3C8702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7052EA2-9A9C-4840-8FA9-DA15BC3C8702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7052EA2-9A9C-4840-8FA9-DA15BC3C8702}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -11,10 +11,13 @@ using MongoDB.Bson;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading;
+using MiniECommerce.Bus;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddMassTransitExt(builder.Configuration);
+
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("DatabaseSettings"));
 

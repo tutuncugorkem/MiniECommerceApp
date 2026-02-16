@@ -1,7 +1,11 @@
+using MiniECommerce.Bus;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMassTransitExt(builder.Configuration);
+
 
 var app = builder.Build();
 
