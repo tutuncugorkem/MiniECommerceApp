@@ -211,6 +211,23 @@ app.MapGet("/api/catalog/products", async (IProductRepository repo) =>
     return Results.Ok(products);
 }).RequireAuthorization();
 
+app.MapPost("/api/catalog/products", async (Product product, IProductRepository repo) =>
+    {
+        await repo.CreateAsync(product);
+        return Results.Created($"/api/catalog/products/{product.Id}", product);
+    })
+    .RequireAuthorization();
+
+app.MapPut("/api/catalog/products/{id}", async (string id, Product product, IProductRepository repo) =>
+    {
+        if (id != product.Id)
+            return Results.BadRequest("Id mismatch");
+
+        await repo.UpdateAsync(id, product);
+        return Results.NoContent();
+    })
+    .RequireAuthorization();
+
 app.Run();
 
 public record KeycloakOptions

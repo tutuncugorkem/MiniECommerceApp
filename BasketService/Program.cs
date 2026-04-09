@@ -59,5 +59,5 @@ app.MapPost("/api/basket/{userId}", async (string userId, BasketItem item, IConn
 app.Run();
 
 
-public record BasketItem(int ProductId, int Quantity);
+public record BasketItem(string ProductId, int Quantity);
 public record Basket(string UserId, List<BasketItem> Items);
